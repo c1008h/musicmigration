@@ -1,12 +1,9 @@
 const SpotifyWebApi = require('spotify-web-api-node');
-
 require('dotenv').config();
 
-console.log('client id', process.env.CLIENT_ID)
-
 const spotifyApi = new SpotifyWebApi({
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET
+    clientId: process.env.SPOTIFY_ClIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET
 })
 
 spotifyApi.clientCredentialsGrant()
@@ -16,3 +13,5 @@ spotifyApi.clientCredentialsGrant()
 .catch(error => {
     console.log('Error retrieving access token:', error);
 })
+
+module.exports = spotifyApi;
