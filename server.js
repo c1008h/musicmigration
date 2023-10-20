@@ -1,13 +1,11 @@
 const express = require("express");
 const app = express();
-const api = require('./routes/api/index')
-
-app.use('/api', api);
+const port = process.env.PORT || 3006;
 
 app.get("/", (req, res) => {
-  res.send("Hello");
+  res.send("Hello, world!");
 });
 
 app.listen(8080, () => {
-    console.log("App is listening on port 8080!\n");
+  console.log(`Server is running on port ${port}`);
 });
