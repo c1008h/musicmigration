@@ -36,8 +36,8 @@ router.get('/auth/spotify', (req, res) => {
 
         res.redirect(authorizationUrl)
     } catch (error) {
-        console.log("Error", error.message)
-        res.status(500).json({ error: 'An error occurred during authorization.' });
+        // console.log("Error", error.message)
+        // res.status(500).json({ error: 'An error occurred during authorization.' });
     }
 })
 
@@ -84,31 +84,31 @@ router.get('/callback', function(req,res) {
     }
 })
 
-// router.get('/refresh_token', function(req, res) {
-//     var refresh_token = req.query.refresh_token;
-//     var authOptions = {
-//       url: 'https://accounts.spotify.com/api/token',
-//       headers: { 'Authorization': 'Basic ' + (new Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
-//       form: {
-//         grant_type: 'refresh_token',
-//         refresh_token: refresh_token
-//       },
-//       json: true
-//     };
+router.get('/refresh_token', function(req, res) {
+    var refresh_token = req.query.refresh_token;
+    var authOptions = {
+      url: 'https://accounts.spotify.com/api/token',
+      headers: { 'Authorization': 'Basic ' + (new Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
+      form: {
+        grant_type: 'refresh_token',
+        refresh_token: refresh_token
+      },
+      json: true
+    };
   
-//     axios(authOptions) 
-//     .then((response) => {
-//       if (response.response.status === 200) {
-//         var access_token = body.access_token;
-//         res.send({
-//           'access_token': access_token
-//         });
-//       }
-//     })
-//     .catch((error) => {
-//         console.log('Error:', error)
-//     })
-// });
+    axios(authOptions) 
+    .then((response) => {
+      if (response.response.status === 200) {
+        var access_token = body.access_token;
+        res.send({
+          'access_token': access_token
+        });
+      }
+    })
+    .catch((error) => {
+        console.log('Error:', error)
+    })
+});
   
 router.get('/saved-tracks', (req, res) => {
     spotifyApi.getMySavedTracks()
